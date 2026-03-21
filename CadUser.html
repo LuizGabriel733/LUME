@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login</title>
+    <link rel="stylesheet" href="caduser.css">
+    <link rel="shortcut icon" type="imagex/png" href="./image/ICONECHROMA.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <div class="container" id="main">
+        <div class="sign-up">
+            <form action="#">
+                <h1>Criar conta</h1>
+                <p>Use seu email para se cadastrar!</p>
+                <input type="text" name="txt" id="sign-upName" placeholder="Nome" required>
+                <input type="email" name="signup-email" id="signup-email" placeholder="Email" required>
+                <div class="cadastro-container">
+                    <input type="password" id="sppassword" placeholder="Senha" required>
+                    <i class="bi bi-eye" id="toque" onclick="mostrar()"></i>
+                </div>
+                <button id="sign-up-button" type="button" onclick="register()">Cadastrar</button>
+            </form>
+        </div>
+        <div class="sign-in">
+            <form id="loginForm">
+                <h1>Entrar</h1>
+                <p>Preencha os dados para se manter conectado!</p>
+                <input type="email" name="login-email" id="login-email" placeholder="Email" required>
+                <div class="login-container">
+                    <input type="password" id="sipassword" placeholder="Senha" required>
+                    <i class="bi bi-eye" id="toquesi" onclick="mostrarsi()"></i>
+                </div>
+                <a class="rpsenha" href="#" onclick="resetPassword()">Esqueceu a senha?</a>
+                <div>
+                    <button id="login-button" type="button" onclick="login()">Entrar</button>
+                </div>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-left">
+                    <h1>Bem vindo(a) de volta!</h1>
+                    <p>Para se manter conectado, entre em sua conta.</p>
+                    <button id="sign-in">Entrar</button>
+                </div>
+                <div class="overlay-right">
+                    <h1>Seja bem vindo(a)!</h1>
+                    <p>Entre em sua conta e faça a diferença em Manaus!</p>
+                    <button id="sign-up">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        const signupbutton = document.getElementById('sign-up');
+        const signinbutton = document.getElementById('sign-in');
+        const main = document.getElementById('main');
+
+        signupbutton.addEventListener('click', () => {
+            main.classList.add("right-painel-active");
+        });
+        signinbutton.addEventListener('click', () => {
+            main.classList.remove("right-painel-active");
+        });
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAq7ZSY9zJSIAHkhollNVHobntjfmMjdD4",
+            authDomain: "reclamamanaus-f23fa.firebaseapp.com",
+            projectId: "reclamamanaus-f23fa",
+            storageBucket: "reclamamanaus-f23fa.firebasestorage.app",
+            messagingSenderId: "735372483202",
+            appId: "1:735372483202:web:09da0010bd8da53645729b"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+    </script>
+    <script src="script.js"></script>
+    <script src="login.js"></script>
+    <script src="register.js"></script>
+</body>
+</html>

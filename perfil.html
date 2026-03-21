@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<section id="perfil"
+    <div class="container_p">
+        <h2 class="title">Perfil</h2>
+        <h1>Bem-vindo, <span id="user-name"></span>!</h1>
+        <p><strong>Email:</strong> <span id="user-email"></span></p>
+        <button id="voltar">Voltar</button>
+        <button id="logout-button">Sair</button>
+        
+        <h2>Suas Melhorias</h2>
+        <ul id="user-improvements">
+           
+        </ul>
+        <h2> Suas denuncia</h2>
+            <ul id="denuncia">
+
+            </ul>
+        
+    
+        <p id="status-message" style="color: red;"></p>
+    </div>
+</section>
+
+
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
+    <script>
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyAq7ZSY9zJSIAHkhollNVHobntjfmMjdD4",
+            authDomain: "reclamamanaus-f23fa.firebaseapp.com",
+            projectId: "reclamamanaus-f23fa",
+            storageBucket: "reclamamanaus-f23fa.firebasestorage.app",
+            messagingSenderId: "735372483202",
+            appId: "1:735372483202:web:09da0010bd8da53645729b"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        const db = firebase.firestore();
+
+    </script>
+    <script src="perfil.js"></script>
+</body>
+</html>

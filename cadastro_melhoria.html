@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canal de Melhoria</title>
+    <link rel="stylesheet" href="melhoria.css">
+    <link rel="shortcut icon" type="imagex/png" href="./image/ICONECHROMA.png">
+</head>
+<body>
+    <!-- Menu de Navegação -->
+    <nav class="navbar">
+        
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <div class="container">
+        <!-- Seção de Instruções -->
+        <div class="instructions">
+            <h2>Diga aqui seu ponto de melhoria!</h2>
+            
+        </div>
+            <!-- Seção do Formulário -->
+            <div class="form-container">
+                <form id="reportForm">
+                    <div class="input-group">
+                        <input id="nome" type="text" placeholder="Nome" required>
+                    
+                    </div>
+                    <div class="input-group">
+                        <input id="email" type="email" placeholder="Email">
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="endereco" placeholder="Endereço" required>
+                        <input type="te" id="bairro" placeholder="Bairro">
+                    </div>
+                    <input type="text" id="titulo" placeholder="Título" required>
+                    <textarea id="melhoria" placeholder="Descreva sua melhoria" required></textarea>
+                    <div>
+                        <div class="card">
+                            <h1>Importar Arquivo</h1>
+                            <form action="#" method="POST" enctype="multipart/form-data">
+                                <label for="fileUpload" class="custom-button">Escolher Arquivo</label>
+                                <input type="file" id="fileUpload" name="file" accept="image/*" style="display: none;">
+                                
+                                <div id="file-name">Nenhum arquivo selecionado</div>
+                            </form>
+                        </div>
+                    </div>
+                
+                    <script>
+                       
+     const fileInput = document.getElementById('fileUpload');
+     const fileNameDisplay = document.getElementById('file-name');
+    fileInput.addEventListener('change', function () {
+    const file = fileInput.files[0];
+    const fileNameDisplay = document.getElementById('file-name');
+
+    
+    fileNameDisplay.textContent = file ? file.name : "Nenhum arquivo selecionado";
+
+    
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            
+            const existingPreview = document.querySelector("#file-name img");
+            if (existingPreview) existingPreview.remove();
+
+           
+            const preview = document.createElement("img");
+            preview.src = e.target.result;
+            preview.style.maxWidth = "200px";
+            preview.style.marginTop = "10px";
+
+            fileNameDisplay.appendChild(preview);
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+                    </script>
+                    
+                    <button type="button" onclick="enviarMelhoria()">ENVIAR</button>
+                </form>
+            </div>
+        </div>
+        <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-storage-compat.js"></script>
+
+
+<script>
+    
+    const firebaseConfig = {
+        apiKey: "AIzaSyAq7ZSY9zJSIAHkhollNVHobntjfmMjdD4",
+        authDomain: "reclamamanaus-f23fa.firebaseapp.com",
+        projectId: "reclamamanaus-f23fa",
+        storageBucket: "reclamamanaus-f23fa.firebasestorage.app",
+        messagingSenderId: "735372483202",
+        appId: "1:735372483202:web:09da0010bd8da53645729b"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    
+    const nomeInput = document.getElementById("nome");
+    const emailInput = document.getElementById("email");
+
+    
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            
+            nomeInput.value = user.displayName || "Usuário sem nome";
+            emailInput.value = user.email || "Email não disponível";
+        } else {
+            
+            window.location.href = "CadUser.html";
+        }
+    });
+</script>
+        <script src="script.js"></script>
+        <script src="dados.js"></script>
+    </body>
+    </html>

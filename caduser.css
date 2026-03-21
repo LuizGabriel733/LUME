@@ -1,0 +1,258 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+*{
+    box-sizing: border-box;
+}
+body{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #f6f5f7;
+    font-family: 'monserrat',sans-serif;
+    min-height: 100%;
+    height: 100%;
+}
+.container{
+    position: relative;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-direction: row;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+                0 10px 10px rgba(0, 0, 0, 0.22)
+}
+.sign-up, .sign-in{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+.sign-up{
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+.sign-in{
+    width: 50%;
+    z-index: 2;
+}
+form{
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+}
+h1{
+    font-weight: bold;
+    margin: 0;
+}
+p{
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 15px 0 20px;
+}
+input{
+    background: #fff;
+    padding: 12px 15px;
+    margin: 15px 0;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    max-width: 300px;
+}
+
+a{
+    color:#333;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 15px 0;
+}
+
+.rpsenha:hover{
+    text-decoration: underline;
+}
+
+button{
+    color: #fff;
+    background: #0036ff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 55px;
+    margin: 20px 0;
+    border-radius: 20px;
+    border: 1px solid #0036ff;
+    outline: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #064bb9;
+}
+
+/*hovers tela de cadastro*/ 
+
+#sign-in, #sign-up{
+    background-color: transparent;
+    border: 2px solid #fff;
+}
+
+.sign-up :focus-visible{
+    outline: 1px solid #333;
+}
+
+.sign-up input:hover{
+    background-color:#fff;
+}
+
+.sign-in input:focus-visible{
+    outline: 1px solid #333;
+}
+
+.sign-in input:hover{
+    background-color:#fff;
+}
+
+#sign-up:hover{
+    outline:2px solid #fff;
+ }
+ 
+ #sign-in:hover{
+     outline:2px solid #fff;
+  }
+ 
+
+/*Ver a senha digitada*/
+.cadastro-container{
+    position: relative;
+    width: 100%;
+}
+
+#sppassword{
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+}
+#toque{
+    font-size: 20px;
+    position: absolute;
+    right: 9px;
+    top: 27px;
+    cursor: pointer;
+    color: #333;
+    box-sizing: border-box;
+}
+
+.login-container{
+    position: relative;
+    width: 100%;
+}
+
+#sipassword{
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+}
+#toquesi{
+    font-size: 20px;
+    position: absolute;
+    right: 9px;
+    top: 27px;
+    cursor: pointer;
+    color: #333;
+    box-sizing: border-box;
+}
+
+
+.container.right-painel-active .sign-in{
+    transform: translateX(100%);
+}
+.container.right-painel-active .sign-up{
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+}
+.overlay-container{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+}
+.container.right-painel-active .overlay-container{
+    transform: translateX(-100%);
+}
+.overlay{
+    position: relative;
+    color: #fff;
+    background: #2282ff;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    background: linear-gradient(to-right, #0036ff, #64a5fa);
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+.container.right-painel-active .overlay{
+    transform: translateX(50%);
+}
+.overlay-left, .overlay-right{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+.overlay-left{
+    transform: translateX(-20%);
+}
+.overlay-right{
+    right: 0;
+    transform: translateX(0);
+}
+.container.right-painel-active .overlay-left{
+    transform: translateX(0);
+}
+.container.right-painel-active .overlay-right{
+    transform: translateX(20%);
+}
+.social-container{
+    margin: 20px 0;
+}
+.social-container a{
+    height: 40px;
+    width: 40px;
+    margin: 0 5px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+}

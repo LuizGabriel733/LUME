@@ -1,0 +1,191 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Menu de Navegação */
+.navbar {
+    width: 100%;
+    background-color: #0036ff;
+    padding: 15px;
+    text-align: center;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 20px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+/* Container Principal */
+.container {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(14, 11, 192, 0.1);
+    overflow: hidden;
+    width: 80%;
+    max-width: 1200px;
+    margin-top: 20px;
+}
+
+/* Seção de Instruções */
+.instructions {
+    background-color: #ffffff;
+    padding: 30px;
+    width: 50%;
+}
+
+.instructions h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.step .icon {
+    font-size: 30px;
+    color: #007bff;
+    margin-right: 15px;
+}
+
+.instructions p {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Seção do Formulário */
+.form-container {
+    background-color: #cae4f7;
+    padding: 20px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;  
+    text-align: center; 
+}
+
+/* Estilo do formulário */
+.form-container form {
+    width: 100%;
+    max-width: 400px;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 18px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+}
+
+/* Alteração para o botão "Enviar" */
+button {
+    width: 70%;
+    padding: 12px;
+    background-color: #0036ff;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 5%;
+    
+}
+
+button:hover {
+    background-color: #064bb9;
+}
+
+/* Estilo do card */
+.card {
+    width: 100%;
+    padding: 30px 30px 40px;
+    text-align: center;
+    background-color: #ffffff;
+    align-items: center;
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Botão customizado para o upload */
+label.custom-button {
+    display: inline-block;
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 68px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border: 2px solid #007BFF;
+    transition: background-color 0.3s;
+    text-align: center; 
+    width: 100%;
+}
+
+/* Efeito ao passar o mouse sobre o botão */
+label.custom-button:hover {
+    background-color: #0056b3; 
+}
+
+/* Esconde o input de file */
+input[type="file"] {
+    display: none;
+}
+
+/* Nome do arquivo */
+#file-name {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 2px solid #ccc; 
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
