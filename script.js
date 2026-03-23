@@ -83,6 +83,10 @@ function mostrarsi(){
 }
 // script.js
 
+function abrirCard(card) {
+    alert("Você clicou em: " + card.querySelector("h3").innerText);
+}
+
 // Referência para o formulário
 const reportForm = document.getElementById('reportForm');
 

@@ -44,194 +44,36 @@
         </div>
     </section>
 
-    <!--sessão sobre-->
-    <section class="about" id="about">
+    <!--sessão cards-->
+     <section class="cards-container">
         <div class="max-width">
-            <h2 class="title">Sobre o software</h2>
-            <div class="about-content">
-                <div class="column left">
-                    
-                       <img src="image/LogoRM.png" alt="">
-
-                   
+            <h2 class="title">Eventos em Destaque</h2>
+            <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; width: 100%;">
+                <!-- Card 1 -->
+                <div class="card" onclick="abrirCard(this)">
+                    <img src="image/exposicao-arte.jpeg" alt="Exposição de Arte">
+                    <h3>Exposição de Arte</h3>
+                    <p class="preco">R$ 40,00</p>
                 </div>
-                <div class="column right">
-                    <div class="text">O Reclama Manaus é <span class="typing-2"></span></div>
-                    <p>Trata-se de um software projetado para permitir que cidadãos enviem reclamações, denúncias ou solicitações relacionadas a problemas ou melhorias na infraestrutura urbana.
-                        Aqui, atuamos como um canal direto de comunicação entre a população manauara e a gestão pública, promovendo o engajamento e a melhoria.
-                    </p>
-                    <br>
-                    <p>Nossos principais objetivos são proporcionar a participação cidadã e a cooperação entre governo e população.
-                    </p>
-                    
+
+                <!-- Card 2 -->
+                <div class="card" onclick="abrirCard(this)">
+                    <img src="image/musica-classica.jpeg" alt="Festival de Música Clássica">
+                    <h3>Festival de Música Clássica</h3>
+                    <p class="preco">R$ 60,00</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card" onclick="abrirCard(this)">
+                    <img src="image/19_primavera_museus.jpeg" alt="Primavera dos Museus">
+                    <h3>Primavera dos Museus</h3>
+                    <p class="preco">R$ 30,00</p>
                 </div>
             </div>
         </div>
     </section>
 
-     <!--sessão serviços-->
-     <section class="services" id="services">
-        <div class="max-width">
-            <h2 class="title">Aqui você pode:</h2>
-            <div class="serv-content">
-                <!-- Card Denúncia -->
-            <div class="card" id="denuncia-card" onclick="window.location.href='cadastro_denuncia.html'">
-                <div class="box">
-                    <ion-icon name="warning-outline"></ion-icon>
-                    <div class="text">Denunciar</div>
-                    <p>Registre reclamações ou alertas sobre diversos tipos de problemas, como: Iluminação pública, buracos e falhas no asfalto, sinalização ou vazamentos.</p>
-                </div>
-            </div>
-
-           <!-- Card Sugerir Melhoria -->
-           <div class="card" id="melhoria-card" onclick="window.location.href='cadastro_melhoria.html'">
-            <div class="box">
-                <ion-icon name="trending-up-outline"></ion-icon>
-                <div class="text">Sugerir melhorias</div>
-                <p>Promova melhorias para a infraestrutura da cidade, como: Implantação de ciclovias, novos semáforos, faixas de pedestres ou melhoria na acessibilidade.</p>
-            </div>
-        </div>
-            </div>
-        </div>
-    </section>
-
-  <!-- Sessão de Contato de órgãos -->
-<section class="contact" id="skills">
-    <div class="max-width">
-        <h2 class="title">Canais de Apoio</h2>
-        <div class="contact-content">
-            <div class="grid-container">
-                <!-- Coluna de Informações - SEINFRA -->
-                <div class="grid-item">
-                    <img src="image/SEINFRA.png" alt="Logo SEINFRA" class="contact-image">
-                    <div class="icons">
-                        <div class="row">
-                            <ion-icon name="logo-whatsapp"></ion-icon>
-                            <div class="info">
-                                <div class="head">Telefone</div>
-                                <div class="sub-title">(92) 99263-0198</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <ion-icon name="mail-outline"></ion-icon>
-                            <div class="info">
-                                <div class="head">Email</div>
-                                <div class="sub-title">gabinete@seinfra.am.gov.br</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Coluna de Informações - DNIT -->
-                <div class="grid-item">
-                    <img src="image/DNIT.png" alt="Logo DNIT" class="contact-image">
-                    <div class="icons">
-                        <div class="row">
-                            <ion-icon name="logo-whatsapp"></ion-icon>
-                            <div class="info">
-                                <div class="head">Telefone</div>
-                                <div class="sub-title">(92) 2127-6003</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <ion-icon name="mail-outline"></ion-icon>
-                            <div class="info">
-                                <div class="head">Email</div>
-                                <div class="sub-title">conexao.dnit@dnit.gov.br</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Coluna de Informações - IMMU -->
-                <div class="grid-item">
-                    <img src="image/IMMU.png" alt="Logo IMMU" class="contact-image">
-                    <div class="icons">
-                        <div class="row">
-                            <ion-icon name="logo-whatsapp"></ion-icon>
-                            <div class="info">
-                                <div class="head">Telefone</div>
-                                <div class="sub-title">(92) 98855-1654</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <ion-icon name="mail-outline"></ion-icon>
-                            <div class="info">
-                                <div class="head">Email</div>
-                                <div class="sub-title">atendimento.immu@manaus.am.gov.br</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Coluna de Informações - Defensoria Pública -->
-                <div class="grid-item">
-                    <img src="image/DEFENSORIA.png" alt="Logo Defensoria Pública" class="contact-image">
-                    <div class="icons">
-                        <div class="row">
-                            <ion-icon name="logo-whatsapp"></ion-icon>
-                            <div class="info">
-                                <div class="head">Telefone</div>
-                                <div class="sub-title">(92) 98559-1599</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <ion-icon name="mail-outline"></ion-icon>
-                            <div class="info">
-                                <div class="head">Email</div>
-                                <div class="sub-title">faleconosco@defensoria.am.gov.br</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Coluna de Informações - SEMULSP -->
-                <div class="grid-item">
-                    <img src="image/SEMULSP.png" alt="Logo SEMULSP" class="contact-image">
-                    <div class="icons">
-                        <div class="row">
-                            <ion-icon name="logo-whatsapp"></ion-icon>
-                            <div class="info">
-                                <div class="head">Telefone</div>
-                                <div class="sub-title">(92) 99372-0355</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <ion-icon name="mail-outline"></ion-icon>
-                            <div class="info">
-                                <div class="head">Email</div>
-                                <div class="sub-title">ipaam.gefa@gmail.com</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Coluna de Informações - Bombeiros -->
-                <div class="grid-item">
-                    <img src="image/BOMBEIROS.png" alt="Logo Bombeiros" class="contact-image">
-                    <div class="icons">
-                        <div class="row">
-                            <ion-icon name="logo-whatsapp"></ion-icon>
-                            <div class="info">
-                                <div class="head">Telefone</div>
-                                <div class="sub-title">(92) 9 99222-4854</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <ion-icon name="mail-outline"></ion-icon>
-                            <div class="info">
-                                <div class="head">Email</div>
-                                <div class="sub-title">bombeirosdoamazonas@gmail.com</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-    <!--Sessão contato-->
+    <!--Sessão de contato-->
     <section class="contact" id="contact">
         <div class="max-width">
             <h2 class="title">Contato</h2>
@@ -245,7 +87,7 @@
                     <ion-icon name="logo-instagram"></ion-icon>
                         <div class="info">
                             <div class="head">Instagram</div>
-                            <div class="sub-title">@reclamamanaus</div>
+                            <div class="sub-title">@lumemuseum</div>
                         </div>
                    </div>
                    <div class="row">
@@ -259,7 +101,7 @@
                 <ion-icon name="mail-unread-outline"></ion-icon>
                 <div class="info">
                     <div class="head">Email</div>
-                    <div class="sub-title">reclamamanaus@gmail.com</div>
+                    <div class="sub-title">lume.museum@gmail.com</div>
                 </div>
            </div>
                </div>
@@ -273,7 +115,7 @@
 
     <!--sessão  footer-->
     <footer>
-        <span>Criado por Reclama Manaus</a> | Todos os direitos reservados 2024</span>
+        <span>Criado por Lume</a> | Todos os direitos reservados 2024</span>
     </footer>
     
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
