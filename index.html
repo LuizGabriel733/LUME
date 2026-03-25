@@ -47,29 +47,28 @@
         <div class="max-width">
             <h2 class="title" id="title">Eventos em Destaque</h2>
             <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; width: 100%;">
-                <!-- Card 1 -->
-                <div class="card" onclick="abrirCard(this)">
+                
+                <div class="card" onclick="abrirModalCompra('Exposição de Arte')">
                     <img src="image/exposicao-arte.jpeg" alt="Exposição de Arte">
                     <h3>Exposição de Arte</h3>
                     <p class="preco">R$ 40,00</p>
                 </div>
 
-                <!-- Card 2 -->
-                <div class="card" onclick="abrirCard(this)">
+                <div class="card" onclick="abrirModalCompra('Festival de Música Clássica')">
                     <img src="image/musica-classica.jpeg" alt="Festival de Música Clássica">
                     <h3>Festival de Música Clássica</h3>
                     <p class="preco">R$ 60,00</p>
                 </div>
 
-                <!-- Card 3 -->
-                <div class="card" onclick="abrirCard(this)">
+                <div class="card" onclick="abrirModalCompra('Primavera dos Museus')">
                     <img src="image/19_primavera_museus.jpeg" alt="Primavera dos Museus">
                     <h3>Primavera dos Museus</h3>
                     <p class="preco">R$ 30,00</p>
                 </div>
+                
             </div>
         </div>
-    </section>
+    </section>   
 
     <!--Sessão de contato-->
     <section class="contact" id="contact">
@@ -110,6 +109,93 @@
             </div>
         </div>
     </section>
+
+    <!--sessão  de compra do ingresso-->
+
+    <div class="modal" id="purchaseModal">
+    <div class="modal-content">
+        <span class="close-modal" id="closeModal">&times;</span>
+        <h2>Comprar Ingressos</h2>
+        <br>
+        <p id="modalEventTitle" style="text-align: center; color: #777; font-weight: bold; margin-bottom: 20px;">Visitação - Ingresso</p>
+
+        <div class="purchase-step">
+            <div class="step-title">1. Selecione a Data</div>
+            <input type="date" id="purchaseDate" required>
+        </div>
+
+        <div class="purchase-step">
+            <div class="step-title">2. Selecione o Horário</div>
+            <div class="time-slots" id="timeSlots">
+                </div>
+        </div>
+
+        <div class="purchase-step">
+            <div class="step-title">3. Selecione os Ingressos</div>
+            
+            <div class="ticket-row">
+                <div>Turista (R$ 20,00)</div>
+                <div class="ticket-controls">
+                    <button class="qty-btn" type="button" onclick="changeQty('turista', -1)">-</button>
+                    <span class="qty-val" id="qtyTurista">0</span>
+                    <button class="qty-btn" type="button" onclick="changeQty('turista', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="ticket-row">
+                <div>Residente da cidade (R$ 10,00)</div>
+                <div class="ticket-controls">
+                    <button class="qty-btn" type="button" onclick="changeQty('residente', -1)">-</button>
+                    <span class="qty-val" id="qtyResidente">0</span>
+                    <button class="qty-btn" type="button" onclick="changeQty('residente', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="ticket-row">
+                <div>Estudante (R$ 10,00)</div>
+                <div class="ticket-controls">
+                    <button class="qty-btn" type="button" onclick="changeQty('estudante', -1)">-</button>
+                    <span class="qty-val" id="qtyEstudante">0</span>
+                    <button class="qty-btn" type="button" onclick="changeQty('estudante', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="ticket-row">
+                <div>Idoso (Gratuito)</div>
+                <div class="ticket-controls">
+                    <button class="qty-btn" type="button" onclick="changeQty('idoso', -1)">-</button>
+                    <span class="qty-val" id="qtyIdoso">0</span>
+                    <button class="qty-btn" type="button" onclick="changeQty('idoso', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="ticket-row">
+                <div>Criança até 8 anos (Gratuito)</div>
+                <div class="ticket-controls">
+                    <button class="qty-btn" type="button" onclick="changeQty('crianca', -1)">-</button>
+                    <span class="qty-val" id="qtyCrianca">0</span>
+                    <button class="qty-btn" type="button" onclick="changeQty('crianca', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="ticket-row">
+                <div>PcD (Gratuito)</div>
+                <div class="ticket-controls">
+                    <button class="qty-btn" type="button" onclick="changeQty('pcd', -1)">-</button>
+                    <span class="qty-val" id="qtyPcd">0</span>
+                    <button class="qty-btn" type="button" onclick="changeQty('pcd', 1)">+</button>
+                </div>
+            </div>
+            
+            <p style="font-size: 12px; color: #d9534f; text-align: center; margin-top: 15px;">
+                * É obrigatória a apresentação de documento comprobatório na entrada para ingressos com desconto ou isenção.
+            </p>
+        </div>
+
+        <div class="total-price" id="totalPrice">Total: R$ 0,00</div>
+        <button class="checkout-btn">Continuar para Pagamento</button>
+    </div>
+</div>
 
     <!--sessão  footer-->
     <footer>
