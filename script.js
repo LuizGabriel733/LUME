@@ -1,17 +1,19 @@
 $(document).ready(function(){
     $(window).scroll(function(){
-        if(this.scrollY > 20){
+        // Conserta o bug do menu transparente
+        if(window.scrollY > 20){
             $('.navbar').addClass("sticky");
-        };
-        if(this.scrollY > 500){
+        } else {
+            $('.navbar').removeClass("sticky");
+        }
+
+        // Controla o botão de subir a página
+        if(window.scrollY > 500){
             $('.scroll-up-btn').addClass("show");
-        }else{
+        } else {
             $('.scroll-up-btn').removeClass("show");
         }
     });
-     $('.scroll-up-btn').click(function(){
-         $('html').animate({scrollTop: 0});
-     });
 
      var typed = new Typed(".typing", {
          strings:["Arte!", "Cultura!", "Conhecimento!"],
@@ -30,6 +32,24 @@ $(document).ready(function(){
         $('.navbar .menu').toggleClass("active");
         $('.menu-btn i').toggleClass("active");
     });
+
+    // === NOVO CÓDIGO: Faz os botões do menu funcionarem perfeitamente ===
+    $('.navbar .menu li a').click(function(e){
+        e.preventDefault(); // Impede o "pulo" seco padrão do HTML
+        
+        // Pega o nome do link que foi clicado (ex: #home, #title, #contact)
+        var sessaoAlvo = $(this).attr("href");
+        
+        // Rola a página suavemente até a sessão correta
+        $('html, body').animate({
+            scrollTop: $(sessaoAlvo).offset().top
+        }, 500); // 500 é a velocidade (meio segundo)
+
+        // Se estiver usando no celular, fecha o menu automaticamente após clicar
+        $('.navbar .menu').removeClass("active");
+        $('.menu-btn i').removeClass("active");
+    });
+
     $('.carousel').owlCarousel({
         margin:20,
         loop:true,
@@ -199,4 +219,177 @@ window.abrirModalCompra = function(nomeDoEvento) {
 
     // 6.4. Finalmente, mostra a janela na tela
     if(modal) modal.style.display = 'flex';
+}
+
+
+/* =========================================
+   LÓGICA DA TELA DE PAGAMENTO
+   ========================================= */
+
+const paymentModal = document.getElementById('paymentModal');
+const closePaymentBtn = document.getElementById('closePaymentModal');
+const continueBtn = document.querySelector('#purchaseModal .checkout-btn'); 
+
+// 1. Abrir modal de pagamento com VALIDAÇÕES
+if (continueBtn) {
+    continueBtn.addEventListener('click', () => {
+        const totalAtual = document.getElementById('totalPrice').innerText;
+        const dataSelecionada = document.getElementById('purchaseDate').value;
+        const horarioSelecionado = document.querySelector('.time-slot.selected');
+        
+        // Validação 1: Tem que ter data
+        if (!dataSelecionada) {
+            alert("Por favor, selecione a data da visitação.");
+            return; // O return faz o código parar aqui e não abre a tela de pagamento
+        }
+
+        // Validação 2: Tem que ter horário
+        if (!horarioSelecionado) {
+            alert("Por favor, selecione o horário desejado.");
+            return;
+        }
+
+        // Validação 3: Tem que ter pelo menos um ingresso selecionado
+        if (totalAtual === "Total: R$ 0,00" && tickets['idoso'].qty === 0 && tickets['crianca'].qty === 0 && tickets['pcd'].qty === 0) {
+            alert("Por favor, selecione pelo menos um ingresso antes de continuar.");
+            return;
+        }
+
+        // Passa o valor para a tela de pagamento
+        document.getElementById('paymentTotalDisplay').innerText = totalAtual;
+        
+        // Esconde a primeira janela e mostra a segunda
+        document.getElementById('purchaseModal').style.display = 'none';
+        paymentModal.style.display = 'flex';
+        
+        // Limpa mensagens e formulários antigos
+        document.getElementById('paymentResult').innerText = ""; 
+        document.getElementById('cardNumber').value = "";
+        document.getElementById('cardExpiry').value = "";
+        document.getElementById('cardCvv').value = "";
+        document.getElementById('cardName').value = "";
+    });
+}
+
+// 2. Fechar modal de pagamento
+if (closePaymentBtn) {
+    closePaymentBtn.addEventListener('click', () => {
+        paymentModal.style.display = 'none';
+    });
+}
+
+// 3. Trocar visualização entre PIX e Cartão
+window.togglePaymentView = function() {
+    const method = document.querySelector('input[name="payMethod"]:checked').value;
+    document.getElementById('pixArea').style.display = method === 'pix' ? 'block' : 'none';
+    document.getElementById('cardArea').style.display = method === 'card' ? 'block' : 'none';
+}
+
+// 4. MÁSCARAS DE FORMATAÇÃO (Cartão e Validade)
+const cardNumberInput = document.getElementById('cardNumber');
+if (cardNumberInput) {
+    cardNumberInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, ''); // Remove letras, deixa só números
+        value = value.replace(/(\d{4})(?=\d)/g, '$1 '); // A cada 4 números, bota um espaço
+        e.target.value = value;
+    });
+}
+
+const cardExpiryInput = document.getElementById('cardExpiry');
+if (cardExpiryInput) {
+    cardExpiryInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, ''); // Remove letras
+        if (value.length > 2) {
+            value = value.substring(0, 2) + '/' + value.substring(2, 4); // Bota a barra MM/AA
+        }
+        e.target.value = value;
+    });
+}
+
+// 5. SIMULADOR E SALVAMENTO (LocalStorage)
+window.processarPagamento = function() {
+    const resultDiv = document.getElementById('paymentResult');
+    const btn = document.getElementById('finishPaymentBtn');
+    
+    resultDiv.innerText = "⏳ Processando pagamento...";
+    resultDiv.className = "payment-msg";
+    
+    // Tranca o botão enquanto processa
+    btn.disabled = true;
+    btn.style.opacity = "0.7";
+
+    setTimeout(() => {
+        const pagamentoAprovado = Math.random() > 0.3; // 70% de chance de aprovar
+        
+        if (pagamentoAprovado) {
+            resultDiv.innerText = "✅ Pagamento Aprovado! Seu ingresso está salvo.";
+            resultDiv.style.color = "#28a745"; 
+            
+            btn.innerText = "Concluído ✓";
+            btn.style.backgroundColor = "#218838"; // Fica verde escuro no sucesso
+            
+            // --- INÍCIO DO SALVAMENTO DE DADOS ---
+            const tituloElement = document.getElementById('modalEventTitle');
+            const dataElement = document.getElementById('purchaseDate');
+            const horarioElement = document.querySelector('.time-slot.selected');
+            const totalElement = document.getElementById('paymentTotalDisplay');
+
+            if(tituloElement && dataElement && horarioElement && totalElement) {
+                const novoIngresso = {
+                    id_compra: Date.now(),
+                    evento: tituloElement.innerText.replace("Evento: ", ""),
+                    data: dataElement.value,
+                    horario: horarioElement.innerText,
+                    total: totalElement.innerText,
+                    status: 'Aprovado'
+                };
+
+                let meusIngressos = JSON.parse(localStorage.getItem('lume_ingressos')) || [];
+                meusIngressos.push(novoIngresso);
+                localStorage.setItem('lume_ingressos', JSON.stringify(meusIngressos));
+            }
+            // --- FIM DO SALVAMENTO ---
+
+            // Fecha a janela depois de 3 segundos e reseta o botão
+            setTimeout(() => {
+                const paymentModal = document.getElementById('paymentModal');
+                if(paymentModal) paymentModal.style.display = 'none';
+                
+                // AQUI ESTÁ A CORREÇÃO: Destranca e reseta o botão para as próximas compras!
+                btn.innerText = "Confirmar Pagamento";
+                btn.style.backgroundColor = "#5cb85c"; // Volta para o tom de verde
+                btn.disabled = false;  // <- O botão volta a funcionar!
+                btn.style.opacity = "1";
+            }, 3000);
+
+        } else {
+            resultDiv.innerText = "❌ Pagamento Recusado. Verifique os dados.";
+            resultDiv.style.color = "#d9534f"; 
+            
+            // Se der erro, também destranca o botão para tentar de novo
+            btn.disabled = false;
+            btn.style.opacity = "1";
+            btn.style.backgroundColor = "#5cb85c"; 
+        }
+    }, 2000);
+}
+
+// Função para o botão "Copiar PIX"
+window.copiarPix = function(btnCopia) {
+    const campoPix = document.getElementById('pixCopiaCola');
+    
+    // Seleciona o texto e copia para a área de transferência
+    campoPix.select();
+    campoPix.setSelectionRange(0, 99999); 
+    navigator.clipboard.writeText(campoPix.value);
+    
+    // Muda para o Marrom Escuro quando clica
+    btnCopia.innerText = "Copiado! ✓";
+    btnCopia.style.backgroundColor = "#6f4e37"; 
+    
+    // Volta para o Marrom Claro depois de 2 segundos
+    setTimeout(() => {
+        btnCopia.innerText = "Copiar Código PIX";
+        btnCopia.style.backgroundColor = "#a67c52";
+    }, 2000);
 }

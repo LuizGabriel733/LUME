@@ -18,28 +18,35 @@ body {
     color: var(--color-secondary);
 }
 .max-width{
-    max-width: 1300px;
+    max-width: 1500px;
     padding: 0 80px;
     margin: auto;
 }
 /*  navbar   inicio*/
-.navbar{
+.navbar {
     position: fixed;
     width: 100%;
-    padding: 30px 0;
+    padding: 15px 0; /* AQUI: Diminuímos de 30px para 15px */
     font-family: 'Ubuntu', sans-serif;
-    z-index: 999;
+    z-index: 1000; /* Lembre-se que tínhamos mudado para 1000 antes! */
     transition: all 0.3s ease;
+    top: 0;
 }
 .navbar.sticky{
      background: var(--color-secondary);
      padding: 15px 0;
 }
-.navbar .max-width{
+.navbar .max-width {
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
+    
+    /* ADICIONE ESTA LINHA: Reduz o espaço à esquerda da logo */
+    padding-left: 20px; 
+    
+    /* BÔNUS: Se quiser que o botão ENTRAR também fique mais perto do canto direito da tela, descomente a linha abaixo */
+    /* padding-right: 20px; */
+}}
 .navbar .logo a{
     color: #fff;
     font-size: 35px;
@@ -56,19 +63,33 @@ body {
     list-style: none;
     display: inline-block;
 }
-.navbar .menu li a{
+/* 1. Alinha o menu perto da logo e empurra o botão Entrar para a direita */
+.navbar .menu {
+    margin-left: 10px; /* Descola um pouco da logo */
+    margin-right: auto; /* A MÁGICA: Empurra o botão ENTRAR para a direita */
+}
+
+/* 2. Controla o texto dos botões do menu */
+.navbar .menu li a {
     color: #fff;
     font-size: 20px;
     font-weight: 500;
-    margin-left: 70px;
-    transition: color 0.3s ease;
+    margin-left: 35px; /* Diminuímos de 70px para 35px para ficarem mais juntinhos e alinhados */
+    transition: color 0.3s ease, transform 0.3s ease; /* Transição suave */
+    display: inline-block; /* Necessário para a animação do hover funcionar 100% */
 }
-.navbar .menu li a:hover{
-    color: var(--color-secondary);
+
+/* O novo hover usando o seu Dourado/Bege */
+.navbar .menu li a:hover {
+    color: var(--color-tertiary); 
+    transform: translateY(-2px); /* Dá um efeitinho subindo o texto levemente */
 }
-.navbar.sticky .menu li a:hover{
-    color: #fff;
+
+/* Garante que o hover dourado continue funcionando mesmo com o fundo marrom escuro */
+.navbar.sticky .menu li a:hover {
+    color: var(--color-tertiary);
 }
+
 .btn-entrar {
     padding: 8px 20px;
     border: 2px solid white;
@@ -241,12 +262,10 @@ section .title::before{
     align-items: center;
     justify-content: space-between;
 }
-/* Ajustando a sublogo para ficar mais à esquerda */
+/* Correção para a logo: mantendo no fluxo do flexbox */
 .navbar .logo {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+    /* posição: absolute; FOI REMOVIDO */
+    /* left: 20px; top/transform TAMBÉM */
     z-index: 100;
 }
 
@@ -259,9 +278,12 @@ section .title::before{
 .navbar .logo img.sublogo:hover {
     opacity: 0.8;
 }
+
+/* Correção para o menu: removendo a margem negativa que causava colisão */
 .navbar .menu {
-    margin-left: -30px;
+    /* margin-left: -30px; FOI REMOVIDO */
 }
+
 /*  sessão Contato  */
 .contact .title::after{
     content: "";
@@ -576,3 +598,55 @@ button:hover {
     cursor: pointer;
 }
 .checkout-btn:hover { background-color: #6f4e37; }
+
+/* =========================================
+   ESTILOS DA MODAL DE PAGAMENTO
+   ========================================= */
+.payment-methods {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+}
+
+.payment-methods label { cursor: pointer; }
+
+.payment-area { margin-bottom: 25px; }
+
+/* Estilo dos campos do cartão */
+.pay-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Garante que os campos não passem da largura da tela */
+    font-family: inherit;
+}
+
+.pay-input:focus {
+    border-color: #6f4e37;
+    outline: none;
+}
+
+/* Estilo do QR Code do PIX */
+.pix-qrcode {
+    display: block;
+    margin: 15px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Dá uma sombrinha elegante */
+}
+/* Mensagens de resposta do simulador */
+.payment-msg {
+    text-align: center;
+    margin: 15px 0;
+    font-weight: bold;
+    font-size: 16px;
+    min-height: 20px; /* Mantém o espaço mesmo quando vazio */
+}
+
+.success-msg { color: #28a745; }
+.error-msg { color: #d9534f; }
+

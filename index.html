@@ -16,7 +16,9 @@
     <div class="navbar">
         <div class="max-width">
             <div class="logo">
+                <a href="#home">
                 <img src="image/sublogo-dark-lume.png" alt="sublogo" class="sublogo">
+                </a>
             </div>
             <ul class="menu">
                 <li><a href="#home">Inicio</a></li>
@@ -194,6 +196,54 @@
 
         <div class="total-price" id="totalPrice">Total: R$ 0,00</div>
         <button class="checkout-btn">Continuar para Pagamento</button>
+    </div>
+</div>
+
+<!--sessão  de pagamento do ingresso-->
+
+<div class="modal" id="paymentModal">
+    <div class="modal-content">
+        <span class="close-modal" id="closePaymentModal">&times;</span>
+        <h2>Pagamento</h2>
+        
+        <div class="total-price" id="paymentTotalDisplay">Total: R$ 0,00</div>
+
+        <div class="payment-methods">
+            <label>
+                <input type="radio" name="payMethod" value="pix" checked onchange="togglePaymentView()"> 
+                PIX
+            </label>
+            <label>
+                <input type="radio" name="payMethod" value="card" onchange="togglePaymentView()"> 
+                Cartão de Crédito
+            </label>
+        </div>
+
+        <div id="pixArea" class="payment-area">
+            <p style="text-align: center; color: #555;">Escaneie o QR Code no seu app do banco:</p>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=PagamentoPIXLumeMuseum" alt="QR Code PIX Lume" class="pix-qrcode">
+        <div style="text-align: center; margin-top: 10px;">
+            <input type="text" id="pixCopiaCola" value="00020126580014br.gov.bcb.pix0136lume@museum.com.br5204000053039865802BR5913MuseuLUME6006Manaus62070503***6304" readonly style="padding: 8px; width: 80%; text-align: center; border: 1px solid #ccc; border-radius: 5px; color: #555; font-size: 12px;">
+            <br>
+            <button type="button" onclick="copiarPix(this)" style="margin-top: 10px; padding: 8px 15px; background-color: #a67c52; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.3s;">Copiar Código PIX</button>
+        </div>
+            <p style="text-align: center; font-size: 14px; font-weight: bold;">Chave PIX: lumemuseum@gmail.com.br</p>
+        </div>
+
+        <div id="cardArea" class="payment-area" style="display: none;">
+            <input type="text" id="cardNumber" placeholder="Número do Cartão" class="pay-input" maxlength="19">
+            <input type="text" id="cardName" placeholder="Nome Impresso no Cartão" class="pay-input">
+            <div style="display: flex; gap: 10px;">
+            <input type="text" id="cardExpiry" placeholder="Validade (MM/AA)" class="pay-input" maxlength="5">
+            <input type="text" id="cardCvv" placeholder="CVV" class="pay-input" maxlength="3">
+        </div>
+    </div>
+
+        <div id="paymentResult" class="payment-msg"></div>
+
+        <button class="checkout-btn" id="finishPaymentBtn" onclick="processarPagamento()" style="background-color: #28a745; color: white; transition: 0.3s; width: 100%; border: none; padding: 15px; border-radius: 5px; font-weight: bold; cursor: pointer;">Confirmar Pagamento</button>
+    </div>
+</div>
     </div>
 </div>
 
