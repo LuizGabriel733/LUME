@@ -1,46 +1,53 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-*{
+
+* {
     box-sizing: border-box;
 }
-body{
+
+body {
+    margin: 0;
     align-items: center;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background-color: #f6f5f7;
-    font-family: 'monserrat',sans-serif;
-    min-height: 100%;
-    height: 100%;
+    background: linear-gradient(135deg, #1f1a17, #6b4f35);
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
 }
-.container{
+
+.container {
     position: relative;
     width: 768px;
-    max-width: 100%;
+    max-width: 95%;
     min-height: 480px;
     background-color: #fff;
-    border-radius: 10px;
+    border-radius: 18px;
     overflow: hidden;
     flex-direction: row;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
-                0 10px 10px rgba(0, 0, 0, 0.22)
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
 }
-.sign-up, .sign-in{
+
+.sign-up,
+.sign-in {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     transition: all 0.6s ease-in-out;
 }
-.sign-up{
+
+.sign-up {
     width: 50%;
     opacity: 0;
     z-index: 1;
 }
-.sign-in{
+
+.sign-in {
     width: 50%;
     z-index: 2;
 }
-form{
+
+form {
     background: #fff;
     display: flex;
     align-items: center;
@@ -50,146 +57,147 @@ form{
     height: 100%;
     text-align: center;
 }
-h1{
+
+h1 {
     font-weight: bold;
     margin: 0;
+    color: #2b2118;
 }
-p{
+
+p {
     font-size: 14px;
     font-weight: 100;
     line-height: 20px;
     letter-spacing: 0.5px;
     margin: 15px 0 20px;
-}
-input{
-    background: #fff;
-    padding: 12px 15px;
-    margin: 15px 0;
-    width: 100%;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    max-width: 300px;
+    color: #555;
 }
 
-a{
-    color:#333;
+input {
+    background: #f7f7f7;
+    padding: 12px 15px;
+    margin: 12px 0;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    outline: none;
+    max-width: 300px;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+input:focus {
+    border-color: #a67c52;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(166, 124, 82, 0.18);
+}
+
+a {
+    color: #333;
     font-size: 14px;
     text-decoration: none;
     margin: 15px 0;
 }
 
-.rpsenha:hover{
+.rpsenha {
+    color: #a67c52;
+    font-weight: bold;
+}
+
+.rpsenha:hover {
     text-decoration: underline;
 }
 
-button{
+button {
     color: #fff;
-    background: #0036ff;
+    background: #a67c52;
     font-size: 12px;
     font-weight: bold;
     padding: 12px 55px;
     margin: 20px 0;
     border-radius: 20px;
-    border: 1px solid #0036ff;
+    border: 1px solid #a67c52;
     outline: none;
     letter-spacing: 1px;
     text-transform: uppercase;
-    transition: transform 80ms ease-in;
+    transition: 0.3s;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #064bb9;
+    background-color: #8b653f;
+    border-color: #8b653f;
+    transform: translateY(-2px);
 }
 
-/*hovers tela de cadastro*/ 
+button:active {
+    transform: scale(0.95);
+}
 
-#sign-in, #sign-up{
+/* Botões da tela lateral */
+
+#sign-in,
+#sign-up {
     background-color: transparent;
     border: 2px solid #fff;
 }
 
-.sign-up :focus-visible{
-    outline: 1px solid #333;
+#sign-in:hover,
+#sign-up:hover {
+    background: #fff;
+    color: #6b4f35;
 }
 
-.sign-up input:hover{
-    background-color:#fff;
-}
+/* Campos de senha com ícone */
 
-.sign-in input:focus-visible{
-    outline: 1px solid #333;
-}
-
-.sign-in input:hover{
-    background-color:#fff;
-}
-
-#sign-up:hover{
-    outline:2px solid #fff;
- }
- 
- #sign-in:hover{
-     outline:2px solid #fff;
-  }
- 
-
-/*Ver a senha digitada*/
-.cadastro-container{
+.cadastro-container,
+.login-container {
     position: relative;
     width: 100%;
+    max-width: 300px;
 }
 
-#sppassword{
+#sppassword,
+#sipassword {
     width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #fff;
-    border-radius: 5px;
+    padding: 12px 42px 12px 15px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f7f7f7;
 }
-#toque{
+
+#sppassword:focus,
+#sipassword:focus {
+    border-color: #a67c52;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(166, 124, 82, 0.18);
+}
+
+#toque,
+#toquesi {
     font-size: 20px;
     position: absolute;
-    right: 9px;
-    top: 27px;
+    right: 12px;
+    top: 22px;
     cursor: pointer;
-    color: #333;
+    color: #555;
     box-sizing: border-box;
 }
 
-.login-container{
-    position: relative;
-    width: 100%;
-}
+/* Animação de troca entre login e cadastro */
 
-#sipassword{
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #fff;
-    border-radius: 5px;
-}
-#toquesi{
-    font-size: 20px;
-    position: absolute;
-    right: 9px;
-    top: 27px;
-    cursor: pointer;
-    color: #333;
-    box-sizing: border-box;
-}
-
-
-.container.right-painel-active .sign-in{
+.container.right-painel-active .sign-in {
     transform: translateX(100%);
 }
-.container.right-painel-active .sign-up{
+
+.container.right-painel-active .sign-up {
     transform: translateX(100%);
     opacity: 1;
     z-index: 5;
 }
-.overlay-container{
+
+.overlay-container {
     position: absolute;
     top: 0;
     left: 50%;
@@ -199,24 +207,28 @@ button:hover {
     transition: transform 0.6s ease-in-out;
     z-index: 100;
 }
-.container.right-painel-active .overlay-container{
+
+.container.right-painel-active .overlay-container {
     transform: translateX(-100%);
 }
-.overlay{
+
+.overlay {
     position: relative;
     color: #fff;
-    background: #2282ff;
     left: -100%;
     height: 100%;
     width: 200%;
-    background: linear-gradient(to-right, #0036ff, #64a5fa);
+    background: linear-gradient(to right, #4b3621, #a67c52);
     transform: translateX(0);
     transition: transform 0.6s ease-in-out;
 }
-.container.right-painel-active .overlay{
+
+.container.right-painel-active .overlay {
     transform: translateX(50%);
 }
-.overlay-left, .overlay-right{
+
+.overlay-left,
+.overlay-right {
     position: absolute;
     display: flex;
     align-items: center;
@@ -230,23 +242,39 @@ button:hover {
     transform: translateX(0);
     transition: transform 0.6s ease-in-out;
 }
-.overlay-left{
+
+.overlay-left h1,
+.overlay-right h1 {
+    color: #fff;
+}
+
+.overlay-left p,
+.overlay-right p {
+    color: #f5f5f5;
+}
+
+.overlay-left {
     transform: translateX(-20%);
 }
-.overlay-right{
+
+.overlay-right {
     right: 0;
     transform: translateX(0);
 }
-.container.right-painel-active .overlay-left{
+
+.container.right-painel-active .overlay-left {
     transform: translateX(0);
 }
-.container.right-painel-active .overlay-right{
+
+.container.right-painel-active .overlay-right {
     transform: translateX(20%);
 }
-.social-container{
+
+.social-container {
     margin: 20px 0;
 }
-.social-container a{
+
+.social-container a {
     height: 40px;
     width: 40px;
     margin: 0 5px;
@@ -255,4 +283,42 @@ button:hover {
     align-items: center;
     border: 1px solid #ccc;
     border-radius: 50px;
+}
+
+/* Responsivo */
+
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+
+    .container {
+        width: 100%;
+        min-height: 620px;
+    }
+
+    form {
+        padding: 0 25px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    p {
+        font-size: 13px;
+    }
+
+    button {
+        padding: 12px 35px;
+    }
+
+    input {
+        max-width: 100%;
+    }
+
+    .cadastro-container,
+    .login-container {
+        max-width: 100%;
+    }
 }
