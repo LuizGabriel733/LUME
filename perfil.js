@@ -56,6 +56,35 @@ firebase.auth().onAuthStateChanged(user => {
                 console.error("Erro ao buscar denúncias:", error);
                 document.getElementById("status-message").textContent = "Erro ao carregar denúncias.";
             });
+
+        const ticketsList = document.getElementById("user-tickets");
+        db.collection("ingressos")
+            .where("userId", "==", user.uid)
+            .orderBy("criadoEm", "desc")
+            .get()
+            .then(snapshot => {
+                if (!snapshot.empty) {
+                    snapshot.forEach(doc => {
+                        const data = doc.data();
+                        const listItem = document.createElement("li");
+                        listItem.innerHTML = `
+                            <strong>Evento:</strong> ${data.evento || 'Evento não informado'} <br>
+                            <strong>Data:</strong> ${data.data || 'Data não informada'} <br>
+                            <strong>Horário:</strong> ${data.horario || 'Horário não informado'} <br>
+                            <strong>Total:</strong> ${data.total || 'Total não informado'} <br>
+                            <strong>Status:</strong> ${data.status || 'Aprovado'} <br>
+                            <strong>Pagamento:</strong> ${data.pagamento || 'pix'}
+                        `;
+                        ticketsList.appendChild(listItem);
+                    });
+                } else {
+                    ticketsList.innerHTML = "<li>Você ainda não possui ingressos cadastrados.</li>";
+                }
+            })
+            .catch(error => {
+                console.error("Erro ao buscar ingressos:", error);
+                document.getElementById("status-message").textContent = "Erro ao carregar ingressos.";
+            });
     } else {
         window.location.href = "CadUser.html";
     }

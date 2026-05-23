@@ -53,19 +53,19 @@
                 <div class="card" onclick="abrirModalCompra('Exposição de Arte')">
                     <img src="image/exposicao-arte.jpeg" alt="Exposição de Arte">
                     <h3>Exposição de Arte</h3>
-                    <p class="preco">R$ 40,00</p>
+                    <p class="preco">R$ 20,00</p>
                 </div>
 
                 <div class="card" onclick="abrirModalCompra('Festival de Música Clássica')">
                     <img src="image/musica-classica.jpeg" alt="Festival de Música Clássica">
                     <h3>Festival de Música Clássica</h3>
-                    <p class="preco">R$ 60,00</p>
+                    <p class="preco">R$ 20,00</p>
                 </div>
 
                 <div class="card" onclick="abrirModalCompra('Primavera dos Museus')">
                     <img src="image/19_primavera_museus.jpeg" alt="Primavera dos Museus">
                     <h3>Primavera dos Museus</h3>
-                    <p class="preco">R$ 30,00</p>
+                    <p class="preco">R$ 20,00</p>
                 </div>
                 
             </div>
@@ -264,30 +264,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
     
 
-    <!-- Firebase - Banco de Dados  -->
-    <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+        <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-storage-compat.js"></script>
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyD_sXTh7dTRHOK_fcxNPlqj6puu4jWiyQQ",
-    authDomain: "lume-ad0d9.firebaseapp.com",
-    databaseURL: "https://lume-ad0d9-default-rtdb.firebaseio.com",
-    projectId: "lume-ad0d9",
-    storageBucket: "lume-ad0d9.firebasestorage.app",
-    messagingSenderId: "700306660774",
-    appId: "1:700306660774:web:436cf4f5c9bde91af04367",
-    measurementId: "G-CBJJRZM9WJ"
-  };
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
+        <!-- Unified Firebase init -->
+        <script src="firebase-config.js"></script>
+
 </script>
     <script src="script.js"></script>
     <script src="log.js"></script>

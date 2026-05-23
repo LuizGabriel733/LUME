@@ -1,0 +1,19 @@
+// Example Storage rules for LUME app
+// Note: client currently uploads to `uploads/{filename}`. For stricter rules, change uploads path to include `uid`.
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Allow uploads to 'uploads' only for authenticated users.
+    // For stronger guarantees, include the UID in the path (e.g. uploads/{uid}/{file}) and check it here.
+    match /uploads/{allPaths=**} {
+      allow read: if request.auth != null; // only authenticated users
+      allow write: if request.auth != null;
+    }
+
+    // Deny access to other paths by default
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

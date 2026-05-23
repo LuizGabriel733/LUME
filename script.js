@@ -230,40 +230,51 @@ const paymentModal = document.getElementById('paymentModal');
 const closePaymentBtn = document.getElementById('closePaymentModal');
 const continueBtn = document.querySelector('#purchaseModal .checkout-btn'); 
 
+function hasSelectedTickets() {
+    return Object.values(tickets).some(ticket => ticket.qty > 0);
+}
+
+function getSelectedTicketsSnapshot() {
+    return Object.entries(tickets)
+        .filter(([, ticket]) => ticket.qty > 0)
+        .map(([type, ticket]) => ({
+            tipo: type,
+            quantidade: ticket.qty,
+            precoUnitario: ticket.price
+        }));
+}
+
+function getCurrentTotalAmount() {
+    return Object.values(tickets).reduce((total, ticket) => total + (ticket.qty * ticket.price), 0);
+}
+
 // 1. Abrir modal de pagamento com VALIDAÇÕES
 if (continueBtn) {
     continueBtn.addEventListener('click', () => {
         const totalAtual = document.getElementById('totalPrice').innerText;
         const dataSelecionada = document.getElementById('purchaseDate').value;
         const horarioSelecionado = document.querySelector('.time-slot.selected');
-        
-        // Validação 1: Tem que ter data
+
         if (!dataSelecionada) {
             alert("Por favor, selecione a data da visitação.");
-            return; // O return faz o código parar aqui e não abre a tela de pagamento
+            return;
         }
 
-        // Validação 2: Tem que ter horário
         if (!horarioSelecionado) {
             alert("Por favor, selecione o horário desejado.");
             return;
         }
 
-        // Validação 3: Tem que ter pelo menos um ingresso selecionado
-        if (totalAtual === "Total: R$ 0,00" && tickets['idoso'].qty === 0 && tickets['crianca'].qty === 0 && tickets['pcd'].qty === 0) {
+        if (!hasSelectedTickets()) {
             alert("Por favor, selecione pelo menos um ingresso antes de continuar.");
             return;
         }
 
-        // Passa o valor para a tela de pagamento
         document.getElementById('paymentTotalDisplay').innerText = totalAtual;
-        
-        // Esconde a primeira janela e mostra a segunda
         document.getElementById('purchaseModal').style.display = 'none';
         paymentModal.style.display = 'flex';
-        
-        // Limpa mensagens e formulários antigos
-        document.getElementById('paymentResult').innerText = ""; 
+
+        document.getElementById('paymentResult').innerText = "";
         document.getElementById('cardNumber').value = "";
         document.getElementById('cardExpiry').value = "";
         document.getElementById('cardCvv').value = "";
@@ -306,72 +317,75 @@ if (cardExpiryInput) {
     });
 }
 
-// 5. SIMULADOR E SALVAMENTO (LocalStorage)
-window.processarPagamento = function() {
+// 5. PAGAMENTO + SALVAMENTO NO FIRESTORE
+window.processarPagamento = async function() {
     const resultDiv = document.getElementById('paymentResult');
     const btn = document.getElementById('finishPaymentBtn');
-    
+    const user = window.ensureAuthenticated ? window.ensureAuthenticated() : firebase.auth().currentUser;
+
+    if (!user) {
+        return;
+    }
+
     resultDiv.innerText = "⏳ Processando pagamento...";
     resultDiv.className = "payment-msg";
-    
-    // Tranca o botão enquanto processa
     btn.disabled = true;
     btn.style.opacity = "0.7";
 
-    setTimeout(() => {
-        const pagamentoAprovado = Math.random() > 0.3; // 70% de chance de aprovar
-        
-        if (pagamentoAprovado) {
-            resultDiv.innerText = "✅ Pagamento Aprovado! Seu ingresso está salvo.";
-            resultDiv.style.color = "#28a745"; 
-            
-            btn.innerText = "Concluído ✓";
-            btn.style.backgroundColor = "#218838"; // Fica verde escuro no sucesso
-            
-            // --- INÍCIO DO SALVAMENTO DE DADOS ---
-            const tituloElement = document.getElementById('modalEventTitle');
-            const dataElement = document.getElementById('purchaseDate');
-            const horarioElement = document.querySelector('.time-slot.selected');
-            const totalElement = document.getElementById('paymentTotalDisplay');
+    const tituloElement = document.getElementById('modalEventTitle');
+    const dataElement = document.getElementById('purchaseDate');
+    const horarioElement = document.querySelector('.time-slot.selected');
+    const totalElement = document.getElementById('paymentTotalDisplay');
+    const paymentMethod = document.querySelector('input[name="payMethod"]:checked')?.value || 'pix';
 
-            if(tituloElement && dataElement && horarioElement && totalElement) {
-                const novoIngresso = {
-                    id_compra: Date.now(),
-                    evento: tituloElement.innerText.replace("Evento: ", ""),
-                    data: dataElement.value,
-                    horario: horarioElement.innerText,
-                    total: totalElement.innerText,
-                    status: 'Aprovado'
-                };
+    if (!tituloElement || !dataElement || !horarioElement || !totalElement) {
+        resultDiv.innerText = "❌ Não foi possível carregar os dados da compra.";
+        resultDiv.style.color = "#d9534f";
+        btn.disabled = false;
+        btn.style.opacity = "1";
+        return;
+    }
 
-                let meusIngressos = JSON.parse(localStorage.getItem('lume_ingressos')) || [];
-                meusIngressos.push(novoIngresso);
-                localStorage.setItem('lume_ingressos', JSON.stringify(meusIngressos));
-            }
-            // --- FIM DO SALVAMENTO ---
+    const ticketSnapshot = getSelectedTicketsSnapshot();
+    const totalAmount = getCurrentTotalAmount();
 
-            // Fecha a janela depois de 3 segundos e reseta o botão
-            setTimeout(() => {
-                const paymentModal = document.getElementById('paymentModal');
-                if(paymentModal) paymentModal.style.display = 'none';
-                
-                // AQUI ESTÁ A CORREÇÃO: Destranca e reseta o botão para as próximas compras!
-                btn.innerText = "Confirmar Pagamento";
-                btn.style.backgroundColor = "#5cb85c"; // Volta para o tom de verde
-                btn.disabled = false;  // <- O botão volta a funcionar!
-                btn.style.opacity = "1";
-            }, 3000);
+    try {
+        await db.collection('ingressos').add({
+            userId: user.uid,
+            userEmail: user.email || '',
+            evento: tituloElement.innerText.replace("Evento: ", ""),
+            data: dataElement.value,
+            horario: horarioElement.innerText,
+            total: `R$ ${totalAmount.toFixed(2).replace('.', ',')}`,
+            totalAmount,
+            pagamento: paymentMethod,
+            ingressos: ticketSnapshot,
+            status: 'Aprovado',
+            criadoEm: firebase.firestore.FieldValue.serverTimestamp()
+        });
 
-        } else {
-            resultDiv.innerText = "❌ Pagamento Recusado. Verifique os dados.";
-            resultDiv.style.color = "#d9534f"; 
-            
-            // Se der erro, também destranca o botão para tentar de novo
+        resultDiv.innerText = "✅ Pagamento Aprovado! Seu ingresso está salvo.";
+        resultDiv.style.color = "#28a745";
+        btn.innerText = "Concluído ✓";
+        btn.style.backgroundColor = "#218838";
+
+        setTimeout(() => {
+            const paymentModal = document.getElementById('paymentModal');
+            if (paymentModal) paymentModal.style.display = 'none';
+
+            btn.innerText = "Confirmar Pagamento";
+            btn.style.backgroundColor = "#5cb85c";
             btn.disabled = false;
             btn.style.opacity = "1";
-            btn.style.backgroundColor = "#5cb85c"; 
-        }
-    }, 2000);
+        }, 3000);
+    } catch (error) {
+        console.error('Erro ao salvar ingresso no Firestore:', error);
+        resultDiv.innerText = "❌ Não foi possível salvar sua compra. Tente novamente.";
+        resultDiv.style.color = "#d9534f";
+        btn.disabled = false;
+        btn.style.opacity = "1";
+        btn.style.backgroundColor = "#5cb85c";
+    }
 }
 
 // Função para o botão "Copiar PIX"

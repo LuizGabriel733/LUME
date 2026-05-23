@@ -1,18 +1,22 @@
 async function enviarDenunciar() {
+    const user = window.ensureAuthenticated ? window.ensureAuthenticated() : firebase.auth().currentUser;
+    if (!user) {
+        return;
+    }
+
     const nome = document.getElementById('nome').value;
     const email = document.getElementById('email').value;
     const endereco = document.getElementById('endereco').value;
     const bairro = document.getElementById('bairro').value;
     const titulo = document.getElementById('titulo').value;
     const denuncia = document.getElementById('denuncia').value;
-    const tipoProblema = document.getElementById('tipoProblema').value; 
+    const tipoProblema = document.getElementById('tipoProblema').value;
     const fileInput = document.getElementById('fileUpload');
 
-    let fileUrl = ""; 
+    let fileUrl = "";
 
     try {
-    
-        if (fileInput.files.length > 0) {
+        if (fileInput && fileInput.files.length > 0) {
             const file = fileInput.files[0];
 
             if (file.size > 10 * 1024 * 1024) {
@@ -24,7 +28,7 @@ async function enviarDenunciar() {
             const sanitizedFileName = file.name.replace(/[^a-zA-Z0-9.]/g, '_');
             const uniqueFileName = `${timestamp}_${sanitizedFileName}`;
 
-            const storageRef = firebase.storage().ref();
+            const storageRef = window.storage ? window.storage.ref() : firebase.storage().ref();
             const fileRef = storageRef.child(`uploads/${uniqueFileName}`);
 
             const metadata = {
@@ -32,11 +36,11 @@ async function enviarDenunciar() {
             };
 
             await fileRef.put(file, metadata);
-            fileUrl = await fileRef.getDownloadURL(); 
+            fileUrl = await fileRef.getDownloadURL();
         }
 
         await db.collection("denuncia").add({
-            userId: firebase.auth().currentUser.uid,
+            userId: user.uid,
             nome,
             email,
             endereco,
@@ -51,9 +55,9 @@ async function enviarDenunciar() {
         alert("Informações enviadas com sucesso!");
         document.getElementById('reportForm').reset();
         document.getElementById('file-name').textContent = "Nenhum arquivo selecionado";
+        window.location.href = "userLogado.html";
     } catch (error) {
         console.error("Erro ao enviar os dados:", error);
         alert("Erro ao enviar os dados. Por favor, tente novamente.");
     }
-    window.location.href = "userLogado.html";
 }

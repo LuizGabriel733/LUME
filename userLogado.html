@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reclama Manaus</title>
-    <link rel="shortcut icon" type="imagex/png" href="./image/ICONECHROMA.png">
+    <title>LUME</title>
+    <link rel="shortcut icon" type="imagex/png" href="./image/simbolo-lume.png">
     
     <link rel="stylesheet" href="style.css">
 </head>
@@ -15,14 +15,15 @@
     </div>
     <div class="navbar">
         <div class="max-width">
+            <div class="logo">
+                <img src="image/sublogo-dark-lume.png" alt="sublogo" class="sublogo">
+            </div>
             <ul class="menu">
                 <li><a href="#home">Inicio</a></li>
-                <li><a href="#about">Sobre</a></li>
-                <li><a href="#services">Serviços</a></li>
-                <li><a href="#skills">Canais de apoio</a></li>
+                <li><a href="#title">Eventos</a></li>
                 <li><a href="#contact">Contato</a></li>
             </ul>
-            <button class="btn-entrar" onclick="window.location.href='Perfil.html'">Perfil</button>
+            <button class="btn-entrar" onclick="window.location.href='perfil.html'">Perfil</button>
             <div class="menu-btn">
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
@@ -34,201 +35,42 @@
         <div class="max-width">
             <div class="home-content">
                 <div class="text-1">Olá, bem vindo ao</div>
-                <div class="text-2">Reclama Manaus</div>
-                <div class="text-3">espalhamos <span class="typing"></span></div>
+                <div class="text-2">LUME</div>
+                <div class="text-3">um espaço de <span class="typing"></span></div>
                 
             </div>
         </div>
     </section>
 
-    <!--sessão sobre-->
-    <section class="about" id="about">
+    <!--sessão cards-->
+     <section class="cards-container">
         <div class="max-width">
-            <h2 class="title">Sobre o software</h2>
-            <div class="about-content">
-                <div class="column left">
-                    
-                       <img src="image/LogoRM.png" alt="">
-
-                   
-                </div>
-                <div class="column right">
-                    <div class="text">O Reclama Manaus é <span class="typing-2"></span></div>
-                    <p>Trata-se de um software projetado para permitir que cidadãos enviem reclamações, denúncias ou solicitações relacionadas a problemas ou melhorias na infraestrutura urbana.
-                        Aqui, atuamos como um canal direto de comunicação entre a população manauara e a gestão pública, promovendo o engajamento e a melhoria.
-                    </p>
-                    <br>
-                    <p>Nossos principais objetivos são proporcionar a participação cidadã e a cooperação entre governo e população.
-                    </p>
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-
-     <!--sessão serviços-->
-     <section class="services" id="services">
-        <div class="max-width">
-            <h2 class="title">Aqui você pode:</h2>
-            <div class="serv-content">
-                <!-- Card Denúncia -->
-            <div class="card" id="denuncia-card" onclick="window.location.href='cadastro_denuncia.html'">
-                <div class="box">
-                    <ion-icon name="warning-outline"></ion-icon>
-                    <div class="text">Denunciar</div>
-                    <p>Registre reclamações ou alertas sobre diversos tipos de problemas, como: Iluminação pública, buracos e falhas no asfalto, sinalização ou vazamentos.</p>
-                </div>
-            </div>
-
-           <!-- Card Sugerir Melhoria -->
-           <div class="card" id="melhoria-card" onclick="window.location.href='cadastro_melhoria.html'">
-            <div class="box">
-                <ion-icon name="trending-up-outline"></ion-icon>
-                <div class="text">Sugerir melhorias</div>
-                <p>Promova melhorias para a infraestrutura da cidade, como: Implantação de ciclovias, novos semáforos, faixas de pedestres ou melhoria na acessibilidade.</p>
-            </div>
-        </div>
-            </div>
-        </div>
-    </section>
-
-  <!-- Sessão de Contato de órgãos -->
-<section class="contact" id="skills">
-    <div class="max-width">
-        <h2 class="title">Canais de Apoio</h2>
-        <div class="contact-content">
-            <div class="grid-container">
-                <!-- Coluna de Informações - SEINFRA -->
-                <div class="grid-item">
-                    <img src="image/SEINFRA.png" alt="Logo SEINFRA" class="contact-image">
-                    <div class="icons">
-                        <div class="row">
-                            <ion-icon name="logo-whatsapp"></ion-icon>
-                            <div class="info">
-                                <div class="head">Telefone</div>
-                                <div class="sub-title">(92) 99263-0198</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <ion-icon name="mail-outline"></ion-icon>
-                            <div class="info">
-                                <div class="head">Email</div>
-                                <div class="sub-title">gabinete@seinfra.am.gov.br</div>
-                            </div>
-                        </div>
-                    </div>
+            <h2 class="title" id="title">Eventos em Destaque</h2>
+            <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; width: 100%;">
+                
+                <div class="card" onclick="abrirModalCompra('Exposição de Arte')">
+                    <img src="image/exposicao-arte.jpeg" alt="Exposição de Arte">
+                    <h3>Exposição de Arte</h3>
+                    <p class="preco">R$ 20,00</p>
                 </div>
 
-                <!-- Coluna de Informações - DNIT -->
-                <div class="grid-item">
-                    <img src="image/DNIT.png" alt="Logo DNIT" class="contact-image">
-                    <div class="icons">
-                        <div class="row">
-                            <ion-icon name="logo-whatsapp"></ion-icon>
-                            <div class="info">
-                                <div class="head">Telefone</div>
-                                <div class="sub-title">(92) 2127-6003</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <ion-icon name="mail-outline"></ion-icon>
-                            <div class="info">
-                                <div class="head">Email</div>
-                                <div class="sub-title">conexao.dnit@dnit.gov.br</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="card" onclick="abrirModalCompra('Festival de Música Clássica')">
+                    <img src="image/musica-classica.jpeg" alt="Festival de Música Clássica">
+                    <h3>Festival de Música Clássica</h3>
+                    <p class="preco">R$ 20,00</p>
                 </div>
 
-                <!-- Coluna de Informações - IMMU -->
-                <div class="grid-item">
-                    <img src="image/IMMU.png" alt="Logo IMMU" class="contact-image">
-                    <div class="icons">
-                        <div class="row">
-                            <ion-icon name="logo-whatsapp"></ion-icon>
-                            <div class="info">
-                                <div class="head">Telefone</div>
-                                <div class="sub-title">(92) 98855-1654</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <ion-icon name="mail-outline"></ion-icon>
-                            <div class="info">
-                                <div class="head">Email</div>
-                                <div class="sub-title">atendimento.immu@manaus.am.gov.br</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Coluna de Informações - Defensoria Pública -->
-                <div class="grid-item">
-                    <img src="image/DEFENSORIA.png" alt="Logo Defensoria Pública" class="contact-image">
-                    <div class="icons">
-                        <div class="row">
-                            <ion-icon name="logo-whatsapp"></ion-icon>
-                            <div class="info">
-                                <div class="head">Telefone</div>
-                                <div class="sub-title">(92) 98559-1599</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <ion-icon name="mail-outline"></ion-icon>
-                            <div class="info">
-                                <div class="head">Email</div>
-                                <div class="sub-title">faleconosco@defensoria.am.gov.br</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="card" onclick="abrirModalCompra('Primavera dos Museus')">
+                    <img src="image/19_primavera_museus.jpeg" alt="Primavera dos Museus">
+                    <h3>Primavera dos Museus</h3>
+                    <p class="preco">R$ 20,00</p>
                 </div>
                 
-                <!-- Coluna de Informações - SEMULSP -->
-                <div class="grid-item">
-                    <img src="image/SEMULSP.png" alt="Logo SEMULSP" class="contact-image">
-                    <div class="icons">
-                        <div class="row">
-                            <ion-icon name="logo-whatsapp"></ion-icon>
-                            <div class="info">
-                                <div class="head">Telefone</div>
-                                <div class="sub-title">(92) 99372-0355</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <ion-icon name="mail-outline"></ion-icon>
-                            <div class="info">
-                                <div class="head">Email</div>
-                                <div class="sub-title">ipaam.gefa@gmail.com</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Coluna de Informações - Bombeiros -->
-                <div class="grid-item">
-                    <img src="image/BOMBEIROS.png" alt="Logo Bombeiros" class="contact-image">
-                    <div class="icons">
-                        <div class="row">
-                            <ion-icon name="logo-whatsapp"></ion-icon>
-                            <div class="info">
-                                <div class="head">Telefone</div>
-                                <div class="sub-title">(92) 9 99222-4854</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <ion-icon name="mail-outline"></ion-icon>
-                            <div class="info">
-                                <div class="head">Email</div>
-                                <div class="sub-title">bombeirosdoamazonas@gmail.com</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>   
 
-    <!--Sessão contato-->
+    <!--Sessão de contato-->
     <section class="contact" id="contact">
         <div class="max-width">
             <h2 class="title">Contato</h2>
@@ -242,7 +84,7 @@
                     <ion-icon name="logo-instagram"></ion-icon>
                         <div class="info">
                             <div class="head">Instagram</div>
-                            <div class="sub-title">@reclamamanaus</div>
+                            <div class="sub-title">@lumemuseum</div>
                         </div>
                    </div>
                    <div class="row">
@@ -256,7 +98,7 @@
                 <ion-icon name="mail-unread-outline"></ion-icon>
                 <div class="info">
                     <div class="head">Email</div>
-                    <div class="sub-title">reclamamanaus@gmail.com</div>
+                    <div class="sub-title">lume.museum@gmail.com</div>
                 </div>
            </div>
                </div>
@@ -268,36 +110,115 @@
         </div>
     </section>
 
+    <!--sessão  de compra do ingresso-->
+
+    <div class="modal" id="purchaseModal">
+    <div class="modal-content">
+        <span class="close-modal" id="closeModal">&times;</span>
+        <h2>Comprar Ingressos</h2>
+        <br>
+        <p id="modalEventTitle" style="text-align: center; color: #777; font-weight: bold; margin-bottom: 20px;">Visitação - Ingresso</p>
+
+        <div class="purchase-step">
+            <div class="step-title">1. Selecione a Data</div>
+            <input type="date" id="purchaseDate" required>
+        </div>
+
+        <div class="purchase-step">
+            <div class="step-title">2. Selecione o Horário</div>
+            <div class="time-slots" id="timeSlots">
+                </div>
+        </div>
+
+        <div class="purchase-step">
+            <div class="step-title">3. Selecione os Ingressos</div>
+            
+            <div class="ticket-row">
+                <div>Turista (R$ 20,00)</div>
+                <div class="ticket-controls">
+                    <button class="qty-btn" type="button" onclick="changeQty('turista', -1)">-</button>
+                    <span class="qty-val" id="qtyTurista">0</span>
+                    <button class="qty-btn" type="button" onclick="changeQty('turista', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="ticket-row">
+                <div>Residente da cidade (R$ 10,00)</div>
+                <div class="ticket-controls">
+                    <button class="qty-btn" type="button" onclick="changeQty('residente', -1)">-</button>
+                    <span class="qty-val" id="qtyResidente">0</span>
+                    <button class="qty-btn" type="button" onclick="changeQty('residente', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="ticket-row">
+                <div>Estudante (R$ 10,00)</div>
+                <div class="ticket-controls">
+                    <button class="qty-btn" type="button" onclick="changeQty('estudante', -1)">-</button>
+                    <span class="qty-val" id="qtyEstudante">0</span>
+                    <button class="qty-btn" type="button" onclick="changeQty('estudante', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="ticket-row">
+                <div>Idoso (Gratuito)</div>
+                <div class="ticket-controls">
+                    <button class="qty-btn" type="button" onclick="changeQty('idoso', -1)">-</button>
+                    <span class="qty-val" id="qtyIdoso">0</span>
+                    <button class="qty-btn" type="button" onclick="changeQty('idoso', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="ticket-row">
+                <div>Criança até 8 anos (Gratuito)</div>
+                <div class="ticket-controls">
+                    <button class="qty-btn" type="button" onclick="changeQty('crianca', -1)">-</button>
+                    <span class="qty-val" id="qtyCrianca">0</span>
+                    <button class="qty-btn" type="button" onclick="changeQty('crianca', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="ticket-row">
+                <div>PcD (Gratuito)</div>
+                <div class="ticket-controls">
+                    <button class="qty-btn" type="button" onclick="changeQty('pcd', -1)">-</button>
+                    <span class="qty-val" id="qtyPcd">0</span>
+                    <button class="qty-btn" type="button" onclick="changeQty('pcd', 1)">+</button>
+                </div>
+            </div>
+            
+            <p style="font-size: 12px; color: #d9534f; text-align: center; margin-top: 15px;">
+                * É obrigatória a apresentação de documento comprobatório na entrada para ingressos com desconto ou isenção.
+            </p>
+        </div>
+
+        <div class="total-price" id="totalPrice">Total: R$ 0,00</div>
+        <button class="checkout-btn">Continuar para Pagamento</button>
+    </div>
+</div>
+
     <!--sessão  footer-->
     <footer>
-        <span>Criado por Reclama Manaus</a> | Todos os direitos reservados 2024</span>
+        <span>Criado por Lume</a> | Todos os direitos reservados 2026</span>
     </footer>
     
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-storage-compat.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
-    
-    <script>
-        const firebaseConfig = {
-        apiKey: "AIzaSyAq7ZSY9zJSIAHkhollNVHobntjfmMjdD4",
-        authDomain: "reclamamanaus-f23fa.firebaseapp.com",
-        projectId: "reclamamanaus-f23fa",
-        storageBucket: "reclamamanaus-f23fa.firebasestorage.app",
-        messagingSenderId: "735372483202",
-        appId: "1:735372483202:web:09da0010bd8da53645729b"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-    </script>
-    <script src="script.js"></script>
-    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+
+        <!-- Unified Firebase init -->
+        <script src="firebase-config.js"></script>
+
+        <script src="script.js"></script>
+        <script src="log.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
 
 </body>
