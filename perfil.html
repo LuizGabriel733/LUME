@@ -5,35 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Perfil</title>
+    <link rel="shortcut icon" type="imagex/png" href="./image/simbolo-lume.png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<section id="perfil"
-    <div class="container_p">
-        <h2 class="title">Perfil</h2>
-        <h1>Bem-vindo, <span id="user-name"></span>!</h1>
-        <p><strong>Email:</strong> <span id="user-email"></span></p>
-        <button id="voltar">Voltar</button>
-        <button id="logout-button">Sair</button>
-        
-        <h2>Suas Melhorias</h2>
-        <ul id="user-improvements">
-           
-        </ul>
-        <h2> Suas denuncia</h2>
-            <ul id="denuncia">
+<section id="perfil" class="perfil-page">
+    <div class="perfil-shell">
+        <div class="perfil-hero">
+            <div class="perfil-avatar" id="perfilAvatar">U</div>
+            <div class="perfil-meta">
+                <p class="perfil-kicker">Perfil do usuário</p>
+                <h1>Bem-vindo, <span id="user-name"></span>!</h1>
+                <p class="perfil-email"><span id="user-email"></span></p>
+                <div class="perfil-actions">
+                    <button id="voltar">Voltar</button>
+                    <button id="logout-button" class="secundario">Sair</button>
+                </div>
+            </div>
+        </div>
 
-            </ul>
+        <div class="perfil-grid">
+            <section class="perfil-panel wide">
+                <div class="panel-head">
+                    <h2>Seus ingressos</h2>
+                    <span>Compras</span>
+                </div>
+                <ul id="user-tickets" class="perfil-list"></ul>
+            </section>
+        </div>
 
-        <h2>Seus Ingressos</h2>
-        <ul id="user-tickets">
-
-        </ul>
-    
-        <p id="status-message" style="color: red;"></p>
+        <p id="status-message" class="perfil-status"></p>
     </div>
 </section>
-
 
     <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
